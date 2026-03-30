@@ -1,0 +1,20 @@
+name: Weekly Report Email
+on:
+  schedule:
+    - cron: '0 23 * * 0'  # 每週一台灣時間早上 7:00
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          to: your@email.com
+          subject: "Jason's Tesla Weekly Report"
+          body: |
+            本週日報已更新，請點擊查看：
+            https://你的帳號.github.io/daily-digest/
