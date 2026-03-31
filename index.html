@@ -824,7 +824,7 @@ let aiContext = "";
 // Call Gemini directly with user's own API Key
 async function callGemini(payload) {
   if (!geminiKey) throw new Error("請先在右下角⚙設定中輸入你的 Gemini API Key");
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${geminiKey}`;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -939,7 +939,7 @@ cat 分類規則：
 
   try {
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${geminiKey}`,
       {
         method:"POST",
         headers:{"Content-Type":"application/json"},
