@@ -2,55 +2,23 @@ name: Weekly Tesla Report
 
 on:
   schedule:
-    - cron: '0 23 * * 0'   # 每週日 23:00 UTC = 週一早上 7:00 台灣
-  workflow_dispatch:         # 手動觸發測試用
+    - cron: '0 23 * * 0'
+  workflow_dispatch:
 
 jobs:
   send:
     runs-on: ubuntu-latest
     steps:
-      - name: Send weekly report email
+      - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
           username: ${{ secrets.EMAIL_USER }}
           password: ${{ secrets.EMAIL_PASS }}
-          subject: "⚡ Tesla Weekly Digest — 本週精華"
+          subject: "⚡ Tesla Weekly Digest"
           to: ${{ secrets.EMAIL_TO }}
           from: Jason's Daily Digest
           html_body: |
-            <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-              <h2 style="color:#DC2626">⚡ Jason's Tesla Weekly Digest</h2>
-              <p>本週 Tesla 日報已更新，點擊查看：</p>
-              <a href="https://你的帳號.github.io/daily-digest/"
-                 style="display:inline-block;padding:12px 24px;background:#DC2626;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold">
-                打開日報
-              </a>
-              <p style="color:#999;font-size:12px;margin-top:24px">
-                每週一早上自動發送 · Jason's Portfolio System
-              </p>
-            </div>
-```
-
-設定好後在 Actions 頁面點「Run workflow」手動測試一次，確認收到信再等排程自動跑。
-
----
-
-## 📰 X 文章為什麼是舊的
-
-這是根本性的問題——**X（Twitter）API 現在需要付費**，每月最低 $100 USD，所以 daily-digest.html 裡的「X 文章」是我當時放的示範資料，根本沒有連接真實 API。
-
-你說的才是正確期待：**每天打開應該能看到今天的 Tesla 相關內容**。
-
-解決方案是改用可以免費取得的來源，我可以幫你改成這樣的架構：
-```
-打開日報 → 點「🔄 更新文章」
-    ↓
-Gemini + Google Search API（每天 100 次免費）
-    ↓
-搜尋「Tesla news today」「TSLA stock」
-    ↓
-Gemini 整理摘要、分類、打分
-    ↓
-顯示最新 10-15 篇
+            <h2>⚡ Tesla 本週精華已更新</h2>
+            <a href="https://t0296684-ehs.github.io/Tesla-Daily-Reports/" style="padding:12px 24px;background:#DC2626;color:#fff;text-decoration:none;border-radius:8px;display:inline-block">打開日報</a>
